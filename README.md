@@ -1,6 +1,5 @@
 # seleniumPythonJs
  This Python code utilizes Selenium, a web automation tool, to scrape football match data from the website 'https://www.adamchoi.co.uk/overs/detailed'.
-Sure, I'll explain the Python code you provided using markup language:
 
 ```python
 from selenium import webdriver
@@ -14,7 +13,7 @@ import time
 website = 'https://www.adamchoi.co.uk/overs/detailed'
 
 # Path to the Chrome WebDriver executable
-chrome_driver_path = 'C:\\Users\\sohan\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe'
+chrome_driver_path = 'C:\\Users\\{YOUR_USER_NAME}\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe'
 
 # Chrome WebDriver options
 options = webdriver.ChromeOptions()
