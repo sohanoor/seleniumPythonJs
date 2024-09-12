@@ -1,78 +1,64 @@
-# seleniumPythonJs
- This Python code utilizes Selenium, a web automation tool, to scrape football match data from the website 'https://www.adamchoi.co.uk/overs/detailed'.
+Documentation
 
-```python
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.by import By
-import pandas as pd
-import time
+#### Aim
+The aim of this project is to develop an automated solution for collecting and analyzing sales data, comparing vendor offers, and managing product orders efficiently. By leveraging Microsoft Excel, Python, Selenium, and Power BI, the project will streamline the process of data collection, price comparison, inventory management, and order placement, ultimately enhancing decision-making and operational efficiency.
 
-# Define the website URL
-website = 'https://www.adamchoi.co.uk/overs/detailed'
+#### Motivation
+In today's competitive market, businesses need to optimize their procurement processes to remain cost-effective and responsive to market changes. Manual processes for data collection, price comparison, and order management are time-consuming and prone to errors. Automating these processes will not only save time but also improve accuracy, leading to better financial decisions and operational efficiency.
 
-# Path to the Chrome WebDriver executable
-chrome_driver_path = 'C:\\Users\\{YOUR_USER_NAME}\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe'
+#### Steps
+1. **Collect Sales Data in Excel:**
+   - Gather historical sales data and store it in Microsoft Excel for analysis.
 
-# Chrome WebDriver options
-options = webdriver.ChromeOptions()
-options.add_argument("--remote-debugging-port=9222")  # Sets the remote debugging port
-options.add_experimental_option("detach", True)  # Detaches the browser session
+2. **Login to Vendor Website with Authentication:**
+   - Use Selenium to automate the login process to the vendor’s website, including handling authentication mechanisms.
 
-# Configure the Chrome WebDriver service
-service = Service(executable_path=chrome_driver_path)
+3. **Collect Vendor Offers:**
+   - Scrape the latest offers from the vendor’s website using Selenium and store the data in Excel.
 
-# Initialize the Chrome WebDriver with specified options and service
-driver = webdriver.Chrome(service=service, options=options)
+4. **Collect Product List with Prices:**
+   - Extract product details and prices from the vendor's website and save this information in Excel.
 
-# Open the website in the browser
-driver.get(website)
+5. **Compare Lowest Prices:**
+   - Use Python to compare vendor prices with existing product prices and identify the lowest prices.
 
-# Print the title of the webpage
-print(driver.title)
+6. **Compare Product Data from Sales and Stock Report:**
+   - Analyze and compare product data from sales reports and stock reports using Python.
 
-# Find and click the "All matches" button on the webpage
-all_matches_button = driver.find_element(By.XPATH, '//label[@analytics-event="All matches"]')
-all_matches_button.click()
+7. **Predict Product Quantity for Next Week:**
+   - Apply predictive analytics techniques in Python to forecast the required product quantity for the upcoming week.
 
-# Find the dropdown menu to select a country and select "Spain" from the dropdown
-dropdown = Select(driver.find_element(By.ID, 'country'))
-dropdown.select_by_visible_text('Spain')
+8. **Create Product List for Next Order:**
+   - Based on the predictions and current inventory, generate a list of products required for the next order.
 
-# Wait for 3 seconds to allow the page to load
-time.sleep(3)
+9. **Place the Order:**
+   - Automate the order placement process using Python and Selenium to interact with the vendor’s ordering system.
 
-# Find all the matches on the webpage
-matches = driver.find_elements(By.TAG_NAME, 'tr')
+10. **Visualize Data with Power BI:**
+    - Import the collected data into Power BI to create interactive dashboards and reports for insightful visualization and decision-making.
 
-# Lists to store data
-date = []
-home_team = []
-score = []
-away_team = []
-count = 0
+#### Technical Details
+- **Microsoft Excel:** Used for data storage, organization, and preliminary analysis.
+- **Python:** Utilized for data processing, analysis, and predictive modeling. Key libraries include pandas, NumPy, and scikit-learn.
+- **Selenium:** Employed for web automation tasks such as logging into vendor websites, scraping data, and placing orders.
+- **Power BI:** Used to create interactive visualizations and dashboards for data analysis and reporting.
 
-# Loop through each match and extract relevant information
-for match in matches:
-    count = count + 1
-    date.append(match.find_element(By.XPATH, './td[1]').text)  # Extract date of the match
-    home_team.append(match.find_element(By.XPATH, './td[2]').text)  # Extract home team
-    score.append(match.find_element(By.XPATH, './td[3]').text)  # Extract match score
-    away_team.append(match.find_element(By.XPATH, './td[4]').text)  # Extract away team
-    print(f'{count}: {match.find_element(By.XPATH, './td[2]').text}')  # Print home team name
+#### Business Benefits
+- **Increased Efficiency:** Automation of data collection and order placement reduces manual effort and operational time.
+- **Enhanced Accuracy:** Minimizes errors associated with manual data entry and calculations.
+- **Cost Savings:** By comparing prices and optimizing order quantities, the business can reduce procurement costs.
+- **Informed Decision-Making:** Data visualization and predictive analytics enable better forecasting and strategic planning.
 
-# Create a DataFrame from the extracted data
-df = pd.DataFrame({'date': date, 'home_team': home_team, 'score': score, 'away_team': away_team})
+#### Knowledge Acquired
+- **Web Automation:** Skills in using Selenium for automating web interactions and data extraction.
+- **Data Analysis:** Experience with Python libraries for data processing, comparison, and predictive analytics.
+- **Data Visualization:** Proficiency in Power BI for creating and interpreting interactive dashboards and reports.
+- **Integration:** Understanding of integrating various tools (Excel, Python, Selenium, Power BI) to achieve comprehensive automation and analysis.
 
-# Save the DataFrame to a CSV file
-df.to_csv('football_data.csv', index=False)
+#### Future Plan
+- **Expand Vendor Integration:** Incorporate additional vendor websites and platforms to broaden the scope of price comparison and order management.
+- **Enhance Predictive Models:** Refine predictive analytics techniques to improve accuracy in forecasting product quantities.
+- **Automate Reporting:** Develop automated reporting features to generate regular updates and insights.
+- **User Interface Development:** Create a user-friendly interface for easier interaction with the automated system and data visualization tools. 
 
-# Print the DataFrame
-print(df)
-
-# Quit the WebDriver, closing the browser
-driver.quit()
-```
-
-This Python script uses the Selenium library to automate interactions with a web browser, specifically Google Chrome. It navigates to a football statistics website, selects matches from Spain, extracts match data (date, teams, and score), stores it in a DataFrame, and then saves it to a CSV file. Finally, it closes the browser.
+This project documentation outlines a comprehensive approach to automating sales data management and order processes, leveraging advanced tools and techniques for optimal business performance.
